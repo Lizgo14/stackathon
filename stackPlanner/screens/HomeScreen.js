@@ -2,6 +2,7 @@ import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   Image,
+  ImageBackground,
   Platform,
   ScrollView,
   StyleSheet,
@@ -9,48 +10,29 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import partyImage from '../assets/images/partyimage.png'
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
+  
   return (
+    
     <View style={styles.container}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
           <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
+            source={partyImage}
+            style={styles.welcomeImage}/>
         </View>
-
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Hi started by opening</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
+          <Text style={styles.getStartedText}>Welcome to</Text>
           <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
+            PlanIT
           </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
+        </View> 
       </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
@@ -111,7 +93,7 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#b0e0e6',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -130,7 +112,7 @@ const styles = StyleSheet.create({
   },
   welcomeImage: {
     width: 100,
-    height: 80,
+    height: 900,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,

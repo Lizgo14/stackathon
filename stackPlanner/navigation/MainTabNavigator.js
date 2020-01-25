@@ -7,6 +7,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import NewActivityScreen from '../screens/NewActivityScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -52,6 +53,22 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
+const NewActivityStack = createStackNavigator(
+  {
+    AddPlan: NewActivityScreen,
+  },
+  config
+);
+
+NewActivityStack.navigationOptions = {
+  tabBarLabel: 'Add Plan',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  ),
+};
+
+NewActivityStack.path = '';
+
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
@@ -70,6 +87,7 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  NewActivityStack,
   LinksStack,
   SettingsStack,
 });
