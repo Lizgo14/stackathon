@@ -1,14 +1,10 @@
-import {studentReducer, singleStudentReducer} from './studentReducer'
-import {campusReducer, singleCampusReducer} from './campusReducer'
+import {planReducer} from './reducer'
 import {combineReducers} from 'redux'
 
 
 
 const rootReducer = combineReducers({
-  allStudents: studentReducer,
-  selectedStudent: singleStudentReducer,
-  allCampuses: campusReducer,
-  selectedCampus: singleCampusReducer
+  plans: planReducer
   })
 
 export default rootReducer

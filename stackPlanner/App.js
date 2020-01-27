@@ -4,6 +4,10 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Provider } from 'react-redux'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import { db } from '../db/config'
+import { createFirestoreInstance } from 'redux-firestore'
 
 import AppNavigator from './navigation/AppNavigator';
 

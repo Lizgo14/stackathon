@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {addPlanDb} from '../db/db'
+import { db } from '../db/config'
 
 const initialState = {
   allPlans: [],
@@ -30,8 +32,8 @@ const addedPlan = (newPlan) =>({
 
 export const addPlan = (newPlan) => {
   return async (dispatch) =>{
-    //const {data} = await Axios.post('/api/campuses', newCampus)
-    dispatch(addedPlan(data))
+    addPlanDb(newPlan)
+    dispatch(addedPlan(newPlan))
   }
 }
 

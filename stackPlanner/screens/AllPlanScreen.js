@@ -1,22 +1,22 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, Button } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { ScrollView, StyleSheet, View, Text, Button, FlatList, SafeAreaView } from 'react-native';
+import { db } from '../db/config'
 
 export default class NewActivityScreen extends React.Component {
-  constructor(){
-  super()
+  constructor(props){
+  super(props)
   this.state = {}}
 
+
   render() {
-  
+  const allPlans = loadPlans()
   return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+      data = {allPlans}
+      renderItem={({item}) => <Item title={item.planName}/>}
+      />
+    </SafeAreaView>
   );
 }
 }
@@ -25,10 +25,17 @@ NewActivityScreen.navigationOptions = {
   title: 'View Plans',
 };
 
+
+const loadPlans = () => {
+  db.ref('/Plan').once('value', function(snapshot){
+    console.log(Object.values(snapshot.val()), "Loaded")
+    return(Object.values(snapshot.val()))
+  })
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fffaf0',
   },
 });

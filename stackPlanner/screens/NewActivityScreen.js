@@ -1,31 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import t from 'tcomb-form-native'
+import { View, Text, StyleSheet, Button, TextInput, Alert } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple'
+import { db } from '../db/config'
+import NumericInput from 'react-native-numeric-input'
 
-const Form = t.form.Form
-
-const Plan = t.struct({
-  "Plan Name:": t.String,
-  "Price Per Person ($):": t.Number,
-  "Number of people:": t.Number,
-  "Description:": t.String
-})
-
-const eventType =[
-    { label: 'Birthday', value: 'birthday' },
-    { label: 'Boozy Brunch', value: 'boozybrunch' },
-    { label: 'Brunch', value: 'brunch' },
-    { label: 'Dinner', value: 'dinner' },
-    { label: 'Bachlorette', value: 'bachlorette' },
-    { label: 'Open Bar', value: 'openbar' },
-    { label: 'Free', value: 'free' },
-    { label: 'Active', value: 'active' },
-    { label: 'Outdoor', value: 'outdoor' },
-    { label: 'Day', value: 'day' },
-    { label: 'Night', value: 'night' },
-    { label: 'Holiday', value: 'holiday' }
-  ]
 
 export default class NewActivityScreen extends React.Component {
   constructor(props){
@@ -43,7 +21,8 @@ export default class NewActivityScreen extends React.Component {
   
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    addPlan(this.state)
     this.setState({
       planName: '',
       ppp: 0,
@@ -51,6 +30,7 @@ export default class NewActivityScreen extends React.Component {
       description: '',
       selectedTags: []
     })
+    Alert.alert('Thanks for sharing your plan!')
   }
   
   onSelectionsChange = (selectedTags) => {
@@ -66,32 +46,34 @@ export default class NewActivityScreen extends React.Component {
         placeholder="Enter Plan Name"
         name = "planName"
         value = {this.state.planName}
-        onChange={planName => this.setState({planName})}
+        onChangeText={planName => this.setState({planName})}
         />
 
        <Text>Price per Person:</Text>
-        <TextInput style ={styles.input}
+        <NumericInput style ={styles.input}
         placeholder="Enter Price per Person"
         name = "ppp"
-        keyboardType="numeric"
         value = {this.state.ppp}
         onChange={ppp => this.setState({ppp})}
         />
 
         <Text>Number of people:</Text>
-                <TextInput style ={styles.input}
+                <NumericInput style ={styles.input}
+                className="form-control"
                 placeholder="Enter Number of People"
                 name = "people"
                 keyboardType="numeric"
                 value = {this.state.people}
-                onChange={people => this.setState({people})}
+                onChangeText={people => this.setState({people})}
                 />
         <Text>Description:</Text>
-        <TextInput style ={{backgroundColor: '#fffaf0', borderColor: 'gray', borderWidth: 1, multiline: true, numberOfLines: 3,height:80}}
+        <TextInput style ={{backgroundColor: '#fffaf0', borderColor: 'gray', borderWidth: 1,height:80}}
         placeholder="Enter Description"
         name = "description"
+        multiline = {true}
+        numberOfLines = {3}
         value = {this.state.description}
-        onChange={description => this.setState({description})}
+        onChangeText={description => this.setState({description})}
         />        
 
         <Text>Plan Type (Select All that Apply):</Text>
@@ -112,7 +94,9 @@ export default class NewActivityScreen extends React.Component {
       title: 'Add Plan',
     };
 
-
+    const addPlan = plan => {
+      db.ref('/Plan').push(plan)
+    }
 
   
 
@@ -129,3 +113,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 });
+
+
+const eventType =[
+  { label: 'Birthday', value: 'birthday' },
+  { label: 'Boozy Brunch', value: 'boozybrunch' },
+  { label: 'Brunch', value: 'brunch' },
+  { label: 'Dinner', value: 'dinner' },
+  { label: 'Bachlorette', value: 'bachlorette' },
+  { label: 'Open Bar', value: 'openbar' },
+  { label: 'Free', value: 'free' },
+  { label: 'Active', value: 'active' },
+  { label: 'Outdoor', value: 'outdoor' },
+  { label: 'Day', value: 'day' },
+  { label: 'Night', value: 'night' },
+  { label: 'Holiday', value: 'holiday' }
+]
