@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import AllPlanScreen from '../screens/AllPlanScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import NewActivityScreen from '../screens/NewActivityScreen'
 
@@ -37,31 +37,31 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const AllPlanStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    AllPlan: AllPlanScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+AllPlanStack.navigationOptions = {
+  tabBarLabel: 'Find Plans',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+AllPlanStack.path = '';
 
 const NewActivityStack = createStackNavigator(
   {
-    AddPlan: NewActivityScreen,
+    NewActivity: NewActivityScreen,
   },
   config
 );
 
 NewActivityStack.navigationOptions = {
-  tabBarLabel: 'Add Plan',
+  tabBarLabel: 'Share Plan',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
@@ -87,8 +87,8 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
+  AllPlanStack,
   NewActivityStack,
-  LinksStack,
   SettingsStack,
 });
 

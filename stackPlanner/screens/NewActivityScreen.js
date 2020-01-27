@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import t from 'tcomb-form-native'
 import SelectMultiple from 'react-native-select-multiple'
 
 const Form = t.form.Form
 
 const Plan = t.struct({
-  "Plan Title:": t.String,
+  "Plan Name:": t.String,
   "Price Per Person ($):": t.Number,
   "Number of people:": t.Number,
   "Description:": t.String
@@ -28,24 +28,73 @@ const eventType =[
   ]
 
 export default class NewActivityScreen extends React.Component {
-
-  state = {selectedTags: []}
-
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log('value: ', value); 
+  constructor(props){
+  super(props)
+  this.state = {
+    planName: '',
+    ppp: 0,
+    people:0,
+    description: '',
+    selectedTags: []
   }
 
+  this.handleSubmit = this.handleSubmit.bind(this)
+  this.onSelectionsChange = this.onSelectionsChange.bind(this)
+  
+  }
+
+  handleSubmit = () => {
+    this.setState({
+      planName: '',
+      ppp: 0,
+      people:0,
+      description: '',
+      selectedTags: []
+    })
+  }
+  
   onSelectionsChange = (selectedTags) => {
-    this.setState({ selectedTags })
+    this.setState({selectedTags})
   }
 
   render(){
 
     return (
       <View style={styles.container}>
-        <Form ref={x => this._form = x} type ={Plan}/>
-        <Text>Plan type (select all that apply):</Text>
+        <Text>Plan Name:</Text>
+        <TextInput style ={styles.input}
+        placeholder="Enter Plan Name"
+        name = "planName"
+        value = {this.state.planName}
+        onChange={planName => this.setState({planName})}
+        />
+
+       <Text>Price per Person:</Text>
+        <TextInput style ={styles.input}
+        placeholder="Enter Price per Person"
+        name = "ppp"
+        keyboardType="numeric"
+        value = {this.state.ppp}
+        onChange={ppp => this.setState({ppp})}
+        />
+
+        <Text>Number of people:</Text>
+                <TextInput style ={styles.input}
+                placeholder="Enter Number of People"
+                name = "people"
+                keyboardType="numeric"
+                value = {this.state.people}
+                onChange={people => this.setState({people})}
+                />
+        <Text>Description:</Text>
+        <TextInput style ={{backgroundColor: '#fffaf0', borderColor: 'gray', borderWidth: 1, multiline: true, numberOfLines: 3,height:80}}
+        placeholder="Enter Description"
+        name = "description"
+        value = {this.state.description}
+        onChange={description => this.setState({description})}
+        />        
+
+        <Text>Plan Type (Select All that Apply):</Text>
         <SelectMultiple
           items={eventType}
           selectedItems={this.state.selectedTags}
@@ -72,5 +121,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: '#b0e0e6',
+  },
+  input:{
+    backgroundColor: '#fffaf0',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
   },
 });

@@ -1,0 +1,47 @@
+import axios from 'axios'
+
+const initialState = {
+  allPlans: [],
+  filteredPlans:[], 
+  selectedSinglePlan: {}
+}
+const ALL_PLANS = "ALL_PLANS"
+const ADD_PLAN = "ADD_PLAN"
+const SINGLE_PLAN = "SINGLE PLAN"
+
+//ALL PLANS
+const gotAllPlans = (plans) =>({
+  type: ALL_PLANS,
+  recievedPlans: plans
+})
+
+export const getPlans = () => {
+  return async (dispatch) => {
+    //const {data} = await Axios.get('/api/campuses')
+    dispatch(gotAllPlans(data))
+  }
+}
+
+//ADD PLAN
+const addedPlan = (newPlan) =>({
+  type: ADD_PLAN,
+  newPlan: newPlan
+})
+
+export const addPlan = (newPlan) => {
+  return async (dispatch) =>{
+    //const {data} = await Axios.post('/api/campuses', newCampus)
+    dispatch(addedPlan(data))
+  }
+}
+
+export const planReducer = (state = initialState, action) => {
+  switch(action.type){
+    case ALL_PLANS:
+      return {...state, allPlans: action.recievedPlans}
+    case ADD_PLAN:
+      return {...state, allPlans: state.allPlans.concat([action.newPlan])}
+    default:
+      return state 
+  }
+}

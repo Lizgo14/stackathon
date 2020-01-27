@@ -1,8 +1,14 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, Button } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
-export default function LinksScreen() {
+export default class NewActivityScreen extends React.Component {
+  constructor(){
+  super()
+  this.state = {}}
+
+  render() {
+  
   return (
     <ScrollView style={styles.container}>
       {/**
@@ -13,15 +19,16 @@ export default function LinksScreen() {
     </ScrollView>
   );
 }
+}
 
-LinksScreen.navigationOptions = {
-  title: 'Links',
+NewActivityScreen.navigationOptions = {
+  title: 'View Plans',
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#fffaf0',
   },
 });
