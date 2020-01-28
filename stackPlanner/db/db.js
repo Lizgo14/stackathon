@@ -1,11 +1,20 @@
 import { db } from './config'
-const testPlan ={
-  planName: 'Cafe Cortadito',
-  ppp: 45,
-  people:15,
-  description: 'A 1.5 hour brunch with unlimited mimosas and food included',
-  selectedTags: ["birthday", "brunch", "boozybrunch"]
-}
+
 export const addPlanDb = plan => {
   db.ref('/Plan').push(plan)
+}
+
+export const getPlansDb = async () => {
+  
+  let allPlans = []
+
+  await db.ref('/Plan').once('value', function(snapshot){
+  snapshot.forEach(data => {
+    item=(data.val())
+    allPlans.push(item)
+    
+    })
+
+  })
+  return allPlans
 }

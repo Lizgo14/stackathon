@@ -8,30 +8,14 @@ import {getPlans} from '../store/plans'
 class AllPlansScreen extends React.Component {
   componentDidMount() {
     this.props.onLoadPlans()
-    console.log(this.props, "ON ALLPLAN PAGE")
   }
 
   render() {
-    const dummydata= [
-      {
-        planName: "Brunch",
-        ppp: 45,
-        people: 10,
-        description: "Unlimited bottomless mimosas at Cafe Cortadito"
-      },
-      {
-        planName: "Open-Bar at Public House",
-        ppp: 50,
-        people: 60,
-        description: "3 Hour Part in Private Room"
-      }
-    ]
-
     return(
       <ScrollView style= {styles.container}>
 
         <FlatList
-          data={dummydata}
+          data={this.props.allPlans}
           renderItem={({ item }) => (
             <ListItem
             style = {styles.list}
@@ -74,12 +58,6 @@ const mapDispatchToProps = function (dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(AllPlansScreen)
 
 
-const loadPlans = () => {
-  db.ref('/Plan').once('value', function(snapshot){
-    return(Object.values(snapshot.val()))
-  })
-}
-
 
 const styles = StyleSheet.create({
   container: {
@@ -96,3 +74,18 @@ const styles = StyleSheet.create({
      borderColor: 'grey',
     borderWidth:1},
 });
+
+const dummydata= [
+  {
+    planName: "Brunch",
+    ppp: 45,
+    people: 10,
+    description: "Unlimited bottomless mimosas at Cafe Cortadito"
+  },
+  {
+    planName: "Open-Bar at Public House",
+    ppp: 50,
+    people: 60,
+    description: "3 Hour Part in Private Room"
+  }
+]

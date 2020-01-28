@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, TextInput, Alert } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple'
-import { db } from '../db/config'
 import NumericInput from 'react-native-numeric-input'
+import {addPlan} from '../store/plans'
+import {connect} from 'react-redux'
 
 
-export default class NewActivityScreen extends React.Component {
+class NewActivityScreen extends React.Component {
   constructor(props){
   super(props)
   this.state = {
@@ -22,7 +23,7 @@ export default class NewActivityScreen extends React.Component {
   }
 
   handleSubmit = (event) => {
-    addPlan(this.state)
+    this.props.addPlan(this.state)
     this.setState({
       planName: '',
       ppp: 0,
@@ -94,9 +95,22 @@ export default class NewActivityScreen extends React.Component {
       title: 'Add Plan',
     };
 
-    const addPlan = plan => {
-      db.ref('/Plan').push(plan)
+
+    const mapStateToProps = (state) =>{
+      return {
+        allPlans: state.allPlans
+      }
     }
+    
+    const mapDispatchToProps = function (dispatch) {
+      return {
+        addPlan: function (newPlan) {
+          dispatch(addPlan(newPlan));
+        }
+      };
+    };
+    
+    export default connect(mapStateToProps, mapDispatchToProps)(NewActivityScreen)
 
   
 
