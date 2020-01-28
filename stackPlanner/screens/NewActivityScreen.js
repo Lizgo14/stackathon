@@ -64,7 +64,7 @@ export default class NewActivityScreen extends React.Component {
                 name = "people"
                 keyboardType="numeric"
                 value = {this.state.people}
-                onChangeText={people => this.setState({people})}
+                onChange={people => this.setState({people})}
                 />
         <Text>Description:</Text>
         <TextInput style ={{backgroundColor: '#fffaf0', borderColor: 'gray', borderWidth: 1,height:80}}

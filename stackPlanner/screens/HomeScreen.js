@@ -19,34 +19,12 @@ export default function HomeScreen() {
   return (
     
     <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
+        <View style={styles.getStartedContainer}>
+          <Text style={styles.titleText}>Welcome to PlanIT</Text>
+        <Image
             source={partyImage}
             style={styles.welcomeImage}/>
-        </View>
-        <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>Welcome to</Text>
-          <Text style={styles.getStartedText}>
-            PlanIT
-          </Text>
         </View> 
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
     </View>
   );
 }
@@ -103,7 +81,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 0,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -111,15 +89,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
+    width: 300,
     height: 900,
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
+    marginTop: 0,
+    marginLeft: -3,
   },
   getStartedContainer: {
     alignItems: 'center',
-    marginHorizontal: 50,
+    marginHorizontal: 0,
   },
   homeScreenFilename: {
     marginVertical: 7,
@@ -177,4 +155,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+  titleText:{
+    fontSize:30,
+    marginTop:100,
+    fontWeight:'bold',
+    margin:0,
+  }
 });

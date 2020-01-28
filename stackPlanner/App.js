@@ -6,12 +6,13 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Provider } from 'react-redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
-import { db } from '../db/config'
+import { db } from './db/config'
 import { createFirestoreInstance } from 'redux-firestore'
-
+import store from './store/store'
 import AppNavigator from './navigation/AppNavigator';
 
-export default function App(props) {
+export default function App (props) {
+
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -24,10 +25,12 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }

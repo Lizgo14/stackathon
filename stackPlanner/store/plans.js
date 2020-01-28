@@ -1,6 +1,6 @@
-import axios from 'axios'
 import {addPlanDb} from '../db/db'
 import { db } from '../db/config'
+
 
 const initialState = {
   allPlans: [],
@@ -19,8 +19,29 @@ const gotAllPlans = (plans) =>({
 
 export const getPlans = () => {
   return async (dispatch) => {
-    //const {data} = await Axios.get('/api/campuses')
-    dispatch(gotAllPlans(data))
+    let plans = []
+    let item
+    let snapshot =await db.collection("Plan").orderBy("lastModified").get()
+
+    snapshot.forEach(x => {
+      plans.push(x.data());
+    })
+
+    // db.ref('/Plan.json').once('value', function(snapshot){
+    //   snapshot.forEach(data => {
+    //     item=JSON.parse(data.val())
+    //     setUp={
+    //       planName: item.planName,
+    //       ppp: item.ppp,
+    //       people: item.people,
+    //       description: item.description,
+    //       selectedTags: item.selectedTags
+    //     }
+
+        //.json()
+        //
+      console.log(plans,"PLANS")
+    dispatch(gotAllPlans(plans))
   }
 }
 

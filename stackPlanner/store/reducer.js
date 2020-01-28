@@ -1,10 +1,5 @@
-import {planReducer} from './reducer'
+import {planReducer} from './plans'
 import {combineReducers} from 'redux'
 
-
-
-const rootReducer = combineReducers({
-  plans: planReducer
-  })
-
+const rootReducer =planReducer
 export default rootReducer
