@@ -47,7 +47,7 @@ const AllPlanStack = createStackNavigator(
 AllPlanStack.navigationOptions = {
   tabBarLabel: 'Find Plans',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-star-outline' : 'md-star-outline'} />
   ),
 };
 
@@ -63,7 +63,7 @@ const NewActivityStack = createStackNavigator(
 NewActivityStack.navigationOptions = {
   tabBarLabel: 'Share Plan',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-add-circle-outline' : 'md-add-circle-outline'} />
   ),
 };
 

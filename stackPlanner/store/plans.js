@@ -20,14 +20,6 @@ const gotAllPlans = (plans) =>({
 export const getPlans = () => {
   return async (dispatch) => {
     let plans = await getPlansDb()
-    // let snapshot =await db.collection("Plan").orderBy("lastModified").get()
-
-    // snapshot.forEach(x => {
-    //   plans.push(x.data());
-    // })
-
-        
-      console.log(plans,"PLANS")
     dispatch(gotAllPlans(plans))
   }
 }
