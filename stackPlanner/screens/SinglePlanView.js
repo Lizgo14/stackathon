@@ -2,7 +2,7 @@ import React from 'react'
 import { ScrollView, StyleSheet, View, Text, Button, FlatList, SafeAreaView, Item} from 'react-native'
 import {connect} from 'react-redux'
 
-class SinglePlanScreen extends React.Component{
+export default class SinglePlanScreen extends React.Component{
 
   render(){
     return(

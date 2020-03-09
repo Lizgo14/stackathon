@@ -4,8 +4,21 @@ import { List, ListItem } from "react-native-elements"
 import { db } from '../db/config'
 import {connect} from 'react-redux'
 import {getPlans} from '../store/plans'
+import {createStackNavigator} 
+  from 'react-navigation-stack'
+import SinglePlan from './SinglePlanView'
+
+
+export default class App extends React.Component {
+    render() {
+      return <MyStackNavigator />;
+    }
+  }
+
+
 
 class AllPlansScreen extends React.Component {
+  
   componentDidMount() {
     this.props.onLoadPlans()
   }
@@ -22,11 +35,20 @@ class AllPlansScreen extends React.Component {
             title={
               <View >
                 <Text style = {{fontSize: 25, fontWeight: 'bold'}}>{item.planName}</Text>
+                <Button
+          title="View Details"
+          //Button Title
+          onPress={() =>
+            this.props.navigation.navigate('SinglePlanView')
+          }
+
+        />
               </View>
             }
             subtitle={item.description}
 
             />
+            
           )}
           keyExtractor={item=>item.planName}
         />
@@ -55,9 +77,17 @@ const mapDispatchToProps = function (dispatch) {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllPlansScreen)
+const allPlansConnected= connect(mapStateToProps, mapDispatchToProps)(AllPlansScreen)
 
-
+const MyStackNavigator = createStackNavigator(
+  {
+  all: allPlansConnected,
+  single: SinglePlan
+  },
+  {
+    initialRouteName: 'all',
+  }
+) 
 
 const styles = StyleSheet.create({
   container: {
