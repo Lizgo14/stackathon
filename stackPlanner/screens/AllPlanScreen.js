@@ -1,19 +1,15 @@
 import React from 'react';
 import { ScrollView, StyleSheet, View, Text, Button, FlatList, SafeAreaView, Item} from 'react-native';
 import { List, ListItem } from "react-native-elements"
-import { db } from '../db/config'
 import {connect} from 'react-redux'
 import {getPlans} from '../store/plans'
 import {createStackNavigator} 
   from 'react-navigation-stack'
 import SinglePlan from './SinglePlanView'
+import { createAppContainer } from 'react-navigation';
 
 
-export default class App extends React.Component {
-    render() {
-      return <MyStackNavigator />;
-    }
-  }
+export default createAppContainer(MyStackNavigator)
 
 
 
@@ -39,7 +35,7 @@ class AllPlansScreen extends React.Component {
           title="View Details"
           //Button Title
           onPress={() =>
-            this.props.navigation.navigate('SinglePlanView')
+            this.props.navigation.navigate('single')
           }
 
         />
